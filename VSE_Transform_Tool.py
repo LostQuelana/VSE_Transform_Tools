@@ -30,6 +30,7 @@ class TF_Add_Transform(bpy.types.Operator):
         return ret and context.space_data.type == 'SEQUENCE_EDITOR'
                 
     def execute(self, context):   
+        #selection = [seq for seq in context.scene.sequence_editor.sequences if seq.select and seq.type not in ['SOUND','TRANSFORM']]
         selection = context.selected_sequences        
         fc = context.scene.frame_current
         lower = 1000
@@ -351,7 +352,7 @@ class TF_Scale(bpy.types.Operator):
     def invoke(self, context, event):         
         
         if event.alt :
-            for seq in context.scene.sequence_editor.sequences:
+            for seq in context.selected_sequences:
                 if seq.select and seq.type == 'TRANSFORM':
                     if seq.input_1.type in ['MOVIE','IMAGE']:
                         crop_scale(seq,1) 
@@ -369,7 +370,7 @@ class TF_Scale(bpy.types.Operator):
             key_val = '+0'
             x = 0
             
-            for seq in context.scene.sequence_editor.sequences:
+            for seq in context.selected_sequences:
                 if seq.select and seq.type == 'TRANSFORM':
                     self.tab_init.append([seq.scale_start_x,seq.scale_start_y])
                     self.tab_init_t.append([get_pos_x(seq),get_pos_y(seq)])
@@ -488,7 +489,7 @@ class TF_Rotation(bpy.types.Operator):
         
         
         if event.alt :
-            for seq in context.scene.sequence_editor.sequences:
+            for seq in context.selected_sequences:
                 if seq.select and seq.type == 'TRANSFORM':
                     seq.rotation_start = 0.0
             ret = 'FINISHED'
@@ -503,7 +504,7 @@ class TF_Rotation(bpy.types.Operator):
             self.key_val = '+0'
             x = 0
             
-            for seq in context.scene.sequence_editor.sequences:
+            for seq in context.selected_sequences:
                 if seq.select and seq.type == 'TRANSFORM':
                     self.tab_init.append(seq.rotation_start)
                     self.tab_init_t.append([get_pos_x(seq),get_pos_y(seq)])
@@ -637,7 +638,7 @@ class TF_Position(bpy.types.Operator):
     def invoke(self, context, event):   
               
         if event.alt :
-            for seq in context.scene.sequence_editor.sequences:
+            for seq in context.selected_sequences:
                 if seq.select and seq.type == 'TRANSFORM':
                     seq.translate_start_x = 0
                     seq.translate_start_y = 0
@@ -651,7 +652,7 @@ class TF_Position(bpy.types.Operator):
             self.tab_init = []
             self.center_area = Vector((0,0))
             x = 0
-            for seq in context.scene.sequence_editor.sequences:
+            for seq in context.selected_sequences:
                 if seq.select and seq.type == 'TRANSFORM': 
                     self.tab_init.append([get_pos_x(seq),get_pos_y(seq)])
                     self.tab.append(seq)
@@ -808,7 +809,7 @@ class TF_Alpha(bpy.types.Operator):
                 
     def invoke(self, context, event): 
         if event.alt :
-            for seq in context.scene.sequence_editor.sequences:
+            for seq in context.selected_sequences:
                 if seq.select and seq.type == 'TRANSFORM':
                     seq.blend_alpha = 1.0
             ret = 'FINISHED'
@@ -1305,7 +1306,7 @@ class TF_Insert_KeyFrame(bpy.types.Operator):
     def execute(self, context):   
         cf = context.scene.frame_current
         
-        for seq in context.scene.sequence_editor.sequences:
+        for seq in context.selected_sequences:
             if seq.select and seq.type == 'TRANSFORM':
                 if self.ch[0] ==1:
                     seq.keyframe_insert(data_path="translate_start_x", frame=cf)
