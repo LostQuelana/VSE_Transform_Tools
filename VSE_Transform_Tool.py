@@ -328,6 +328,17 @@ class TF_Scale(bpy.types.Operator):
                     seq.translate_start_y = set_pos_y(seq, (init_t[1] - center_c2d.y) * round(diff_y, precision) + center_c2d.y)
                     
         if event.type == 'LEFTMOUSE' or event.type == 'RET' or event.type == 'NUMPAD_ENTER' or not self.tab:           
+            cf = context.scene.frame_current
+            seq.keyframe_insert(data_path="translate_start_x", frame=cf)
+            seq.keyframe_insert(data_path="translate_start_y", frame=cf)
+            seq.keyframe_insert(data_path="rotation_start", frame=cf)
+            seq.keyframe_insert(data_path="scale_start_x", frame=cf)
+            seq.keyframe_insert(data_path="scale_start_y", frame=cf)
+            seq.keyframe_insert(data_path="blend_alpha", frame=cf)
+            seq.input_1.crop.keyframe_insert(data_path="min_x", frame=cf)
+            seq.input_1.crop.keyframe_insert(data_path="max_x", frame=cf)
+            seq.input_1.crop.keyframe_insert(data_path="min_y", frame=cf)
+            seq.input_1.crop.keyframe_insert(data_path="max_y", frame=cf)    
             bpy.types.SpaceSequenceEditor.draw_handler_remove(self._handle_line, 'PREVIEW')
             if self._handle_axes:
                 bpy.types.SpaceSequenceEditor.draw_handler_remove(self._handle_axes, 'PREVIEW')
@@ -470,6 +481,17 @@ class TF_Rotation(bpy.types.Operator):
             context.area.header_text_set("Rotation %.4f " % info_rot)
                         
         if event.type == 'LEFTMOUSE' or event.type == 'RET' or event.type == 'NUMPAD_ENTER' or not self.tab:
+            cf = context.scene.frame_current
+            seq.keyframe_insert(data_path="translate_start_x", frame=cf)
+            seq.keyframe_insert(data_path="translate_start_y", frame=cf)
+            seq.keyframe_insert(data_path="rotation_start", frame=cf)
+            seq.keyframe_insert(data_path="scale_start_x", frame=cf)
+            seq.keyframe_insert(data_path="scale_start_y", frame=cf)
+            seq.keyframe_insert(data_path="blend_alpha", frame=cf)
+            seq.input_1.crop.keyframe_insert(data_path="min_x", frame=cf)
+            seq.input_1.crop.keyframe_insert(data_path="max_x", frame=cf)
+            seq.input_1.crop.keyframe_insert(data_path="min_y", frame=cf)
+            seq.input_1.crop.keyframe_insert(data_path="max_y", frame=cf)    
             bpy.types.SpaceSequenceEditor.draw_handler_remove(self._handle_line, 'PREVIEW')
             context.area.header_text_set()
             return {'FINISHED'}
@@ -619,6 +641,17 @@ class TF_Position(bpy.types.Operator):
                     seq.translate_start_y = set_pos_y(seq, init_g[1] + round(sign_y*vec_act_fm.y * view_zoom_preview(), precision)) 
                     
         if event.type == 'LEFTMOUSE' or event.type == 'RET' or event.type == 'NUMPAD_ENTER' or not self.tab:
+            cf = context.scene.frame_current
+            seq.keyframe_insert(data_path="translate_start_x", frame=cf)
+            seq.keyframe_insert(data_path="translate_start_y", frame=cf)
+            seq.keyframe_insert(data_path="rotation_start", frame=cf)
+            seq.keyframe_insert(data_path="scale_start_x", frame=cf)
+            seq.keyframe_insert(data_path="scale_start_y", frame=cf)
+            seq.keyframe_insert(data_path="blend_alpha", frame=cf)
+            seq.input_1.crop.keyframe_insert(data_path="min_x", frame=cf)
+            seq.input_1.crop.keyframe_insert(data_path="max_x", frame=cf)
+            seq.input_1.crop.keyframe_insert(data_path="min_y", frame=cf)
+            seq.input_1.crop.keyframe_insert(data_path="max_y", frame=cf)    
             if self._handle_axes:
                 bpy.types.SpaceSequenceEditor.draw_handler_remove(self._handle_axes, 'PREVIEW')
             context.area.header_text_set()
@@ -797,6 +830,17 @@ class TF_Alpha(bpy.types.Operator):
         context.scene.sequence_editor.active_strip.blend_alpha = self.fac    
         
         if event.type == 'LEFTMOUSE' or event.type == 'RET' or event.type == 'NUMPAD_ENTER':
+            cf = context.scene.frame_current
+            seq.keyframe_insert(data_path="translate_start_x", frame=cf)
+            seq.keyframe_insert(data_path="translate_start_y", frame=cf)
+            seq.keyframe_insert(data_path="rotation_start", frame=cf)
+            seq.keyframe_insert(data_path="scale_start_x", frame=cf)
+            seq.keyframe_insert(data_path="scale_start_y", frame=cf)
+            seq.keyframe_insert(data_path="blend_alpha", frame=cf)
+            seq.input_1.crop.keyframe_insert(data_path="min_x", frame=cf)
+            seq.input_1.crop.keyframe_insert(data_path="max_x", frame=cf)
+            seq.input_1.crop.keyframe_insert(data_path="min_y", frame=cf)
+            seq.input_1.crop.keyframe_insert(data_path="max_y", frame=cf)    
             bpy.types.SpaceSequenceEditor.draw_handler_remove(self._handle_alpha, 'PREVIEW')                
             return {'FINISHED'}
         
@@ -997,6 +1041,17 @@ class TF_Crop(bpy.types.Operator):
         
         #select a corner
         if event.type == 'LEFTMOUSE' and event.value == 'PRESS':
+            cf = context.scene.frame_current
+            seq.keyframe_insert(data_path="translate_start_x", frame=cf)
+            seq.keyframe_insert(data_path="translate_start_y", frame=cf)
+            seq.keyframe_insert(data_path="rotation_start", frame=cf)
+            seq.keyframe_insert(data_path="scale_start_x", frame=cf)
+            seq.keyframe_insert(data_path="scale_start_y", frame=cf)
+            seq.keyframe_insert(data_path="blend_alpha", frame=cf)
+            seq.input_1.crop.keyframe_insert(data_path="min_x", frame=cf)
+            seq.input_1.crop.keyframe_insert(data_path="max_x", frame=cf)
+            seq.input_1.crop.keyframe_insert(data_path="min_y", frame=cf)
+            seq.input_1.crop.keyframe_insert(data_path="max_y", frame=cf)    
             len_bl = self.pos_mouse - vec_bl
             len_tr = self.pos_mouse - vec_tr
             len_org = self.pos_mouse - vec_ct
@@ -1052,6 +1107,17 @@ class TF_Crop(bpy.types.Operator):
             
         #move the image                                
         if event.type == 'LEFTMOUSE' and event.value == 'RELEASE':
+            cf = context.scene.frame_current
+            seq.keyframe_insert(data_path="translate_start_x", frame=cf)
+            seq.keyframe_insert(data_path="translate_start_y", frame=cf)
+            seq.keyframe_insert(data_path="rotation_start", frame=cf)
+            seq.keyframe_insert(data_path="scale_start_x", frame=cf)
+            seq.keyframe_insert(data_path="scale_start_y", frame=cf)
+            seq.keyframe_insert(data_path="blend_alpha", frame=cf)
+            seq.input_1.crop.keyframe_insert(data_path="min_x", frame=cf)
+            seq.input_1.crop.keyframe_insert(data_path="max_x", frame=cf)
+            seq.input_1.crop.keyframe_insert(data_path="min_y", frame=cf)
+            seq.input_1.crop.keyframe_insert(data_path="max_y", frame=cf)    
             self.sel_point = 0
 
         if event.type == 'MIDDLEMOUSE' and event.value == 'PRESS':
